@@ -9,7 +9,7 @@ resource "aws_route53_record" "tectonic-api" {
   name    = "${var.tectonic_cluster_name}-k8s"
   type    = "A"
   ttl     = "60"
-  records = ["${openstack_compute_instance_v2.master_node.*.access_ip_v4}"]
+  records = ["${openstack_lb_loadbalancer_v2.master_lb.vip_address}"]
 }
 
 resource "aws_route53_record" "tectonic-console" {

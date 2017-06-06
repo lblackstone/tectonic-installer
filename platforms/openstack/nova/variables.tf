@@ -34,3 +34,9 @@ EOF
 
   default = "public"
 }
+
+variable "tectonic_openstack_subnet_id" {
+  type = "string"
+
+  description = "WIP - subnet id needed for LBaaS"
+}
