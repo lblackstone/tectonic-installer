@@ -4,6 +4,7 @@ resource "openstack_lb_loadbalancer_v2" "master_lb" {
 }
 
 resource "openstack_lb_listener_v2" "master_lb_https_listener" {
+  default_pool_id = "${openstack_lb_pool_v2.master_lb_pool.id}"
   loadbalancer_id = "${openstack_lb_loadbalancer_v2.master_lb.id}"
   protocol = "HTTPS"
   protocol_port = 443
@@ -12,7 +13,7 @@ resource "openstack_lb_listener_v2" "master_lb_https_listener" {
 resource "openstack_lb_pool_v2" "master_lb_pool" {
   lb_method = "ROUND_ROBIN"
   protocol = "HTTPS"
-  listener_id = "${openstack_lb_listener_v2.master_lb_https_listener.id}"
+  loadbalancer_id = "${openstack_lb_loadbalancer_v2.master_lb.id}"
 }
 
 resource "openstack_lb_member_v2" "master_lb_members" {
